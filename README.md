@@ -14,8 +14,9 @@ Bobbin is a small Unity editor tool that automatically downloads files into your
 - tested on Unity 2018.3.2f1
 
 ## if you need a serious spreadsheet solution
-then sadly this isn't it, this is a simple tool that just downloads files, nothing more
-- for a big fancy thing that can generate data-types / C# auto-completion, maybe check out [Meta Sheets](http://metasheets.com/) or [CastleDB](http://castledb.org/) / [CastleDB-Unity-Importer](https://github.com/kkukshtel/castledb-unity-importer)
+then sadly this isn't it, this is a simple tool that just downloads files, nothing more! for a big fancy thing that can generate data-types / C# auto-completion, here are some better options:
+- [Meta Sheets](http://metasheets.com/)
+- [CastleDB](http://castledb.org/) / [CastleDB-Unity-Importer](https://github.com/kkukshtel/castledb-unity-importer)
 
 ## license
 - MIT
