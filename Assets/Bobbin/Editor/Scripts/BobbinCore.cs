@@ -46,8 +46,8 @@ namespace Bobbin
         [MenuItem("Bobbin/Force Refresh All Files")]
         public static void DoRefresh()
         {
+            refreshInProgress = false;
             Instance.StartRefresh();
-
         }
 
         [MenuItem("Bobbin/Add URLs and Settings...")]
@@ -61,10 +61,6 @@ namespace Bobbin
             if (refreshInProgress == false)
             {
                 EditorCoroutines.StartCoroutine(RefreshCoroutine(), this);
-            }
-            else
-            {
-                Debug.LogWarning("Bobbin is already refreshing files right now. Please wait until it's finished.");
             }
         }
 
@@ -124,7 +120,12 @@ namespace Bobbin
                         //AssetDatabase.LoadAssetAtPath(currentPair.filePath,typeof(UnityEngine.Object)) == null ||
                         if (currentPair.assetReference == null ||  currentPair.lastFileHash.Equals(checksum) == false)
                         {
-                            using (FileStream fls = new FileStream(Application.dataPath.Substring(0, Application.dataPath.Length - "Assets".Length) + currentPair.filePath, FileMode.Create))
+                            var fullPath = Application.dataPath.Substring(0, Application.dataPath.Length - "Assets".Length) + currentPair.filePath;
+                            var directoryPath = Path.GetDirectoryName( fullPath );
+                            if ( Directory.Exists(directoryPath) == false) {
+                                Directory.CreateDirectory( directoryPath );
+                            }
+                            using (FileStream fls = new FileStream(fullPath, FileMode.Create))
                             {
                                 fls.Write(results[i].downloadHandler.data, 0, results[i].downloadHandler.data.Length);
                             }
