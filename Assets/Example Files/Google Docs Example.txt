@@ -1,0 +1,36 @@
+﻿This is a test file for Bobbin. For more info, go to https://github.com/radiatoryang/bobbin
+
+
+To use Bobbin to import a Google Doc as a Text Asset in your Unity project, you need to:
+
+
+1. Create a Google Doc
+
+
+2. Click the “Share” button in the upper-right corner of the Google Docs screen
+  
+
+3. Click “Get shareable link” in the upper-right of the share dialog
+  
+
+4. Copy the share link (or click “Copy link”)
+(NOTE: if link sharing is already on, then you could also copy the URL from your browser’s address bar too.)
+  
+
+5. In the Unity menu bar, click Bobbin > Add URLs and Settings
+  
+
+6. In the Unity inspector, click “Add New File”
+  
+
+7. Paste the link from Step 4 into the URL field
+  
+
+
+
+Some important notes to keep in mind:
+* Images (and anything else that isn’t text) won’t be imported into the Unity text asset.
+* Bobbin is one-way only, you can’t use it to edit the Google Doc from the Unity Editor.
+
+
+But still, there’s so much you can do now -- for example, you could collaborate with writers or translators via Google Docs, and then Bobbin can download the files automatically into your project.
