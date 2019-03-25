@@ -182,6 +182,22 @@ namespace Bobbin
             return url;
         }
 
+        public static string UnfixURL(string url)
+        {
+           // if it's a Google Docs URL, then grab the document ID and reformat the URL
+            if (url.StartsWith("https://docs.google.com/document/export?format=txt"))
+            {
+                var docID = url.Substring( "https://docs.google.com/document/export?format=txt&id=".Length, 44 );
+                return string.Format("https://docs.google.com/document/d/{0}/edit", docID);
+            }
+            if (url.StartsWith("https://docs.google.com/spreadsheets/export?format=csv"))
+            {
+                var docID = url.Substring( "https://docs.google.com/spreadsheets/export?format=csv&id=".Length, 44 );
+                return string.Format("https://docs.google.com/spreadsheets/d/{0}", docID);
+            }
+            return url;
+        }
+
     }
 
 

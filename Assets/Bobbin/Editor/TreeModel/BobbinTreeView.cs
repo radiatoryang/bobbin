@@ -240,8 +240,19 @@ namespace Bobbin
 
                         if (column == MyColumns.Value1)
                         {
+                            bool hasURL = item.data.url != null && item.data.url.Length > 4;
+                            if ( hasURL ) {
+                                cellRect.width -= 20;
+                            }
                             item.data.url = GUI.TextField(cellRect, item.data.url);
-                            //item.data.url = BobbinCore.FixURL( item.data.url ); // validate and fix-up URL (especially for Google Docs)
+                            if ( hasURL ) {
+                                cellRect.x += cellRect.width;
+                                cellRect.width = 20;
+                                if ( GUI.Button( cellRect, new GUIContent(">", "click to view in web browser: " + BobbinCore.UnfixURL(item.data.url) ) ) ) {
+                                    Application.OpenURL( BobbinCore.UnfixURL(item.data.url) );
+                                }
+                            }
+                            
                         }
                         if (column == MyColumns.Value2)
                         {
@@ -258,9 +269,11 @@ namespace Bobbin
                                 GUI.enabled = true;
                                 cellRect.x -= 20;
                                 cellRect.width = 20;
-                                if (GUI.Button(cellRect, new GUIContent("x", "reset asset file path")))
+                                if (GUI.Button(cellRect, new GUIContent("x", "reset asset file path\n" + item.data.filePath)))
                                 {
                                     item.data.assetReference = null;
+                                    item.data.filePath = "";
+                                    item.data.lastFileHash = "";
                                 }
                             }
                             else

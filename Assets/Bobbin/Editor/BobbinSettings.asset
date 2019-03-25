@@ -23,45 +23,25 @@ MonoBehaviour:
     lastFileHash: 
     label: 
     assetReference: {fileID: 0}
-  - m_ID: 12
-    m_Name: Item 12
+  - m_ID: 13
+    m_Name: Google Docs Example
     m_Depth: 0
     enabled: 1
     fileType: 0
-    url: 
-    filePath: 
-    lastFileHash: 
+    url: https://docs.google.com/document/export?format=txt&id=16qV96pKt5sQp49fxx0Y_RHcSb2makAAOBHGxwa__0XU&includes_info_params=true
+    filePath: Assets/Example Files/Google Docs Example.txt
+    lastFileHash: fdd79c242edc17673597ad656133aa9d
     label: 
-    assetReference: {fileID: 0}
+    assetReference: {fileID: 4900000, guid: 26ad90e5ff8d8ac4088204aa12f4c865, type: 3}
   - m_ID: 9
-    m_Name: Spreadsheet2
+    m_Name: Google Sheets Example
     m_Depth: 0
     enabled: 1
     fileType: 1
     url: https://docs.google.com/spreadsheets/export?format=csv&id=1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms
-    filePath: Assets/Bobbin/Spreadsheet2.csv
+    filePath: Assets/Example Files/Google Sheets Example.csv
     lastFileHash: f6ec9d52e21cb67b8694f6e01006a084
     label: 
-    assetReference: {fileID: 4900000, guid: d85907b581dbcb047a13ac3db583bd7f, type: 3}
-  - m_ID: 8
-    m_Name: Level3
-    m_Depth: 0
-    enabled: 0
-    fileType: 0
-    url: https://docs.google.com/document/export?format=txt&id=1rm05QCc-wgfMLd7S0tO0SkLuCZ__zxHKnSEYx1PbWk8&includes_info_params=true
-    filePath: Assets/GoogleDocsTest2_Blah.txt
-    lastFileHash: 7ce02e29f8267313d9569c9850e96161
-    label: 
-    assetReference: {fileID: 4900000, guid: 68193fb164cd1554391041ef6d63d96b, type: 3}
-  - m_ID: 7
-    m_Name: GoogleDocsTest
-    m_Depth: 0
-    enabled: 1
-    fileType: 0
-    url: https://docs.google.com/document/export?format=txt&id=1rm05QCc-wgfMLd7S0tO0SkLuCZ__zxHKnSEYx1PbWk8&includes_info_params=true
-    filePath: Assets/GoogleDocsTest.yarn.txt
-    lastFileHash: 7ce02e29f8267313d9569c9850e96161
-    label: 
-    assetReference: {fileID: 4900000, guid: f31f6939a186e314eb206674fc47c920, type: 3}
+    assetReference: {fileID: 4900000, guid: a89a5979c4d3f7445806c12eb49f8ce1, type: 3}
   autoRefresh: 0
   refreshInterval: 120
