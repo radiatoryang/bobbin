@@ -3,7 +3,7 @@
 
 Bobbin is a small Unity editor tool that automatically downloads files into your Unity project
 - downloads files from any URL, and/or any publicly viewable Google Docs or Google Sheets without any login
-- perfect for collaborating with designers, writers, or translators... edit collaboratively in browser, auto-import into your game
+- perfect for collaborating with designers, writers, or translators... edit stuff collaboratively in browser, and then auto-import the data directly into your game
 - all your settings (URLs and file paths) are saved in a ScriptableObject, convenient for source control
 - really lightweight; the core code is just 3 C# files
 
@@ -17,3 +17,4 @@ Bobbin is a small Unity editor tool that automatically downloads files into your
 
 ## acknowledgments
 - this uses [Editor Coroutines](https://github.com/marijnz/unity-editor-coroutines)
+- this uses [TreeView](https://docs.unity3d.com/Manual/TreeViewAPI.html)
