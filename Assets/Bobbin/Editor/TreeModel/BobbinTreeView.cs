@@ -55,23 +55,19 @@ namespace Bobbin
             if (root.children == null)
                 return;
 
-            Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
-            for (int i = root.children.Count - 1; i >= 0; i--)
-                stack.Push(root.children[i]);
+            Stack<TreeViewItem> stack = new Stack<TreeViewItem>(root.children);
 
             while (stack.Count > 0)
             {
                 TreeViewItem current = stack.Pop();
-                result.Add(current);
 
                 if (current.hasChildren && current.children[0] != null)
                 {
-                    for (int i = current.children.Count - 1; i >= 0; i--)
-                    {
-                        stack.Push(current.children[i]);
-                    }
+                    foreach(TreeViewItem t in current.children)
+                        stack.Push(t);
                 }
             }
+            return;
         }
 
         public BobbinTreeView(TreeViewState state, MultiColumnHeader multicolumnHeader, TreeModel<BobbinPath> model) : base(state, multicolumnHeader, model)
