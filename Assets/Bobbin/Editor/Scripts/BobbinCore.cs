@@ -95,8 +95,15 @@ namespace Bobbin
                         continue;
                     }
 
+                    if(string.IsNullOrEmpty(currentPair.initUrl))
+                    {
+                        currentPair.initUrl = currentPair.url;
+                        currentPair.url = FixURL(currentPair.url, currentPair.sheetId);
+                    } else
+                    {
+                        currentPair.url = FixURL(currentPair.initUrl, currentPair.sheetId);
+                    }
                     // actually send the web request now
-                    currentPair.url = FixURL( currentPair.url, currentPair.sheetId);
                     results[i] = UnityWebRequest.Get( currentPair.url );
                     yield return results[i].SendWebRequest();
 
