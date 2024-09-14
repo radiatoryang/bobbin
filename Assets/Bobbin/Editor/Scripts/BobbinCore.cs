@@ -95,8 +95,15 @@ namespace Bobbin
                         continue;
                     }
 
+                    if(string.IsNullOrEmpty(currentPair.initUrl))
+                    {
+                        currentPair.initUrl = currentPair.url;
+                        currentPair.url = FixURL(currentPair.url, currentPair.sheetId);
+                    } else
+                    {
+                        currentPair.url = FixURL(currentPair.initUrl, currentPair.sheetId);
+                    }
                     // actually send the web request now
-                    currentPair.url = FixURL( currentPair.url );
                     results[i] = UnityWebRequest.Get( currentPair.url );
                     yield return results[i].SendWebRequest();
 
@@ -167,17 +174,18 @@ namespace Bobbin
         }
 
 
-        public static string FixURL(string url)
+        public static string FixURL(string url, string sheetNameOrId = "")
         {
             // if it's a Google Docs URL, then grab the document ID and reformat the URL
-            if (url.StartsWith("https://docs.google.com/document/d/"))
+            string docID = url.Substring("https://docs.google.com/spreadsheets/d/".Length, 44);
+            url = string.Format("https://docs.google.com/spreadsheets/export?format=csv&id={0}", docID);
+            if (!string.IsNullOrEmpty(sheetNameOrId))
             {
-                var docID = url.Substring( "https://docs.google.com/document/d/".Length, 44 );
-                return string.Format("https://docs.google.com/document/export?format=txt&id={0}&includes_info_params=true", docID);
+                url += "&gid=" + sheetNameOrId;
             }
             if (url.StartsWith("https://docs.google.com/spreadsheets/d/"))
             {
-                var docID = url.Substring( "https://docs.google.com/spreadsheets/d/".Length, 44 );
+                docID = url.Substring( "https://docs.google.com/spreadsheets/d/".Length, 44 );
                 return string.Format("https://docs.google.com/spreadsheets/export?format=csv&id={0}", docID);
             }
             return url;

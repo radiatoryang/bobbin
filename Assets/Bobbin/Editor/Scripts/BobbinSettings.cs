@@ -14,7 +14,7 @@ namespace Bobbin
     {
         public bool enabled = true;
         public FileType fileType;
-        public string url, filePath, lastFileHash, label;
+        public string initUrl,url, filePath, lastFileHash, label,sheetId;
         public Object assetReference;
 
         public BobbinPath (string name, int depth, int id) : base (name, depth, id)

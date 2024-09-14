@@ -20,6 +20,7 @@ namespace Bobbin
             Toggle,
             Name,
             Value1,
+            Value11,
             Value2,
             Value3,
         }
@@ -29,6 +30,7 @@ namespace Bobbin
             Toggle,
             Name,
             Value1,
+            Value11,
             Value2,
             Value3,
         }
@@ -39,6 +41,7 @@ namespace Bobbin
             SortOption.Toggle,
             SortOption.Name,
             SortOption.Value1,
+            SortOption.Value11,
             SortOption.Value2,
             SortOption.Value3,
         };
@@ -55,19 +58,23 @@ namespace Bobbin
             if (root.children == null)
                 return;
 
-            Stack<TreeViewItem> stack = new Stack<TreeViewItem>(root.children);
+            Stack<TreeViewItem> stack = new Stack<TreeViewItem>();
+            for (int i = root.children.Count - 1; i >= 0; i--)
+                stack.Push(root.children[i]);
 
             while (stack.Count > 0)
             {
                 TreeViewItem current = stack.Pop();
+                result.Add(current);
 
                 if (current.hasChildren && current.children[0] != null)
                 {
-                    foreach(TreeViewItem t in current.children)
-                        stack.Push(t);
+                    for (int i = current.children.Count - 1; i >= 0; i--)
+                    {
+                        stack.Push(current.children[i]);
+                    }
                 }
             }
-            return;
         }
 
         public BobbinTreeView(TreeViewState state, MultiColumnHeader multicolumnHeader, TreeModel<BobbinPath> model) : base(state, multicolumnHeader, model)
@@ -142,6 +149,9 @@ namespace Bobbin
                     case SortOption.Value1:
                         orderedQuery = orderedQuery.ThenBy(l => l.data.url, ascending);
                         break;
+                    case SortOption.Value11:
+                        orderedQuery = orderedQuery.ThenBy(l => l.data.sheetId, ascending);
+                        break;
                     case SortOption.Value2:
                         orderedQuery = orderedQuery.ThenBy(l => l.data.fileType, ascending);
                         break;
@@ -166,6 +176,8 @@ namespace Bobbin
                     return myTypes.Order(l => l.data.name, ascending);
                 case SortOption.Value1:
                     return myTypes.Order(l => l.data.url, ascending);
+                case SortOption.Value11:
+                    return myTypes.Order(l => l.data.sheetId, ascending);
                 case SortOption.Value2:
                     return myTypes.Order(l => l.data.fileType, ascending);
                 case SortOption.Value3:
@@ -228,6 +240,7 @@ namespace Bobbin
                     break;
 
                 case MyColumns.Value1:
+                case MyColumns.Value11:
                 case MyColumns.Value2:
                 case MyColumns.Value3:
                     {
@@ -237,18 +250,25 @@ namespace Bobbin
                         if (column == MyColumns.Value1)
                         {
                             bool hasURL = item.data.url != null && item.data.url.Length > 4;
-                            if ( hasURL ) {
+                            if (hasURL)
+                            {
                                 cellRect.width -= 20;
                             }
                             item.data.url = GUI.TextField(cellRect, item.data.url);
-                            if ( hasURL ) {
+                            if (hasURL)
+                            {
                                 cellRect.x += cellRect.width;
                                 cellRect.width = 20;
-                                if ( GUI.Button( cellRect, new GUIContent(">", "click to view in web browser: " + BobbinCore.UnfixURL(item.data.url) ) ) ) {
-                                    Application.OpenURL( BobbinCore.UnfixURL(item.data.url) );
+                                if (GUI.Button(cellRect, new GUIContent(">", "click to view in web browser: " + BobbinCore.UnfixURL(item.data.url))))
+                                {
+                                    Application.OpenURL(BobbinCore.UnfixURL(item.data.url));
                                 }
                             }
-                            
+
+                        }
+                        if (column == MyColumns.Value11)
+                        {
+                            item.data.sheetId = GUI.TextField(cellRect, item.data.sheetId);
                         }
                         if (column == MyColumns.Value2)
                         {
@@ -372,6 +392,17 @@ namespace Bobbin
                     sortingArrowAlignment = TextAlignment.Right,
                     width = 110,
                     minWidth = 60,
+                    autoResize = true,
+                    allowToggleVisibility = false
+                },
+                new MultiColumnHeaderState.Column
+                {
+                    headerContent = new GUIContent("Sheet", "Bobbin will try to fetch and download content at this sheet."),
+                    headerTextAlignment = TextAlignment.Left,
+                    sortedAscending = true,
+                    sortingArrowAlignment = TextAlignment.Right,
+                    width = 40,
+                    minWidth = 20,
                     autoResize = true,
                     allowToggleVisibility = false
                 },
